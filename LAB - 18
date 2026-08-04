@@ -1,0 +1,35 @@
+# Simple 56-bit representation
+key56 = list(range(1, 57))
+
+# Divide into two disjoint 28-bit halves
+C = key56[:28]
+D = key56[28:]
+
+print("56-bit Key:")
+print(key56)
+
+print("\nC half - first 28 bits:")
+print(C)
+
+print("\nD half - second 28 bits:")
+print(D)
+
+print("\nLength of C =", len(C))
+print("Length of D =", len(D))
+
+# Simple demonstration of selecting 24 bits
+C_selected = C[:24]
+D_selected = D[:24]
+
+subkey = C_selected + D_selected
+
+print("\nFirst 24 subkey bits from C:")
+print(C_selected)
+
+print("\nSecond 24 subkey bits from D:")
+print(D_selected)
+
+print("\n48-bit Subkey:")
+print(subkey)
+
+print("\nSubkey length =", len(subkey))
