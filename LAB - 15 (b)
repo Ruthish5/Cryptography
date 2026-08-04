@@ -1,0 +1,52 @@
+from collections import Counter
+
+cipher = input("Enter ciphertext: ").upper()
+top = int(input("Enter number of results needed: "))
+
+freq = {
+    'E': 12.7, 'T': 9.1, 'A': 8.2,
+    'O': 7.5, 'I': 7.0, 'N': 6.7
+}
+
+common_words = ["THE", "IS", "AND", "THIS", "TO", "OF", "A"]
+
+results = []
+
+for key in range(26):
+    plain = ""
+
+    for ch in cipher:
+        if ch.isalpha():
+            plain += chr((ord(ch) - 65 - key) % 26 + 65)
+        else:
+            plain += ch
+
+    letters = [ch for ch in plain if ch.isalpha()]
+    count = Counter(letters)
+    total = len(letters)
+
+    score = 0
+
+    if total > 0:
+        for letter, expected in freq.items():
+            actual = count[letter] * 100 / total
+            score += abs(actual - expected)
+
+    # Reward common English words
+    for word in common_words:
+        if word in plain.split():
+            score -= 10
+
+    results.append((score, key, plain))
+
+results.sort()
+
+print("\nMost likely plaintexts:\n")
+
+for i in range(min(top, 26)):
+    score, key, plain = results[i]
+
+    print("Rank:", i + 1)
+    print("Key:", key)
+    print("Plaintext:", plain)
+    print()
