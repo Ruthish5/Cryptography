@@ -1,0 +1,77 @@
+def find_position(matrix, letter):
+
+    if letter == 'J':
+        letter = 'I'
+
+    for row in range(5):
+        for col in range(5):
+
+            if matrix[row][col] == letter:
+                return row, col
+
+
+def decrypt_pair(matrix, a, b):
+
+    r1, c1 = find_position(matrix, a)
+    r2, c2 = find_position(matrix, b)
+
+    # Same row
+    if r1 == r2:
+        return (
+            matrix[r1][(c1 - 1) % 5] +
+            matrix[r2][(c2 - 1) % 5]
+        )
+
+    # Same column
+    elif c1 == c2:
+        return (
+            matrix[(r1 - 1) % 5][c1] +
+            matrix[(r2 - 1) % 5][c2]
+        )
+
+    # Rectangle
+    else:
+        return (
+            matrix[r1][c2] +
+            matrix[r2][c1]
+        )
+
+
+key = input("Enter Playfair key: ").upper()
+
+alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+
+letters = ""
+
+for ch in key + alphabet:
+
+    if ch == 'J':
+        ch = 'I'
+
+    if ch.isalpha() and ch not in letters:
+        letters += ch
+
+matrix = [letters[i:i+5] for i in range(0, 25, 5)]
+
+print("\nPlayfair Matrix:")
+
+for row in matrix:
+    print(" ".join(row))
+
+cipher = input("\nEnter ciphertext: ").upper()
+
+cipher = cipher.replace(" ", "")
+cipher = cipher.replace("J", "I")
+
+plaintext = ""
+
+for i in range(0, len(cipher), 2):
+
+    plaintext += decrypt_pair(
+        matrix,
+        cipher[i],
+        cipher[i + 1]
+    )
+
+print("\nDecrypted text:")
+print(plaintext)
