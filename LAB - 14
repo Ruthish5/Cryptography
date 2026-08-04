@@ -1,0 +1,16 @@
+plaintext = "SENDMOREMONEY"
+
+key = [9, 0, 1, 7, 23, 15, 21, 14, 11, 11, 2, 8, 9]
+
+ciphertext = ""
+
+for i in range(len(plaintext)):
+
+    p = ord(plaintext[i]) - 65
+
+    c = (p + key[i]) % 26
+
+    ciphertext += chr(c + 65)
+
+print("Plaintext :", plaintext)
+print("Ciphertext:", ciphertext)
