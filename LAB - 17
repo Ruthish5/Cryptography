@@ -1,0 +1,26 @@
+shift_schedule = [
+    1, 1, 2, 2,
+    2, 2, 2, 2,
+    1, 2, 2, 2,
+    2, 2, 2, 1
+]
+
+print("DES Encryption Key Schedule\n")
+
+keys = []
+
+for round_no in range(16):
+    key_name = "K" + str(round_no + 1)
+    keys.append(key_name)
+
+    print("Round", round_no + 1,
+          "Shift =", shift_schedule[round_no],
+          "Key =", key_name)
+
+print("\nEncryption Order:")
+
+print(" -> ".join(keys))
+
+print("\nDecryption Order:")
+
+print(" -> ".join(reversed(keys)))
