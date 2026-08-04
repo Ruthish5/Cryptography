@@ -1,0 +1,14 @@
+import math
+
+keys = math.factorial(25)
+
+power = math.log2(keys)
+
+print("Total possible Playfair keys =", keys)
+print("Approximate power of 2 = 2^", round(power, 2))
+
+# Equivalent keys caused by cyclic row/column shifts
+unique_keys = keys // (25 * 25)
+
+print("Effectively unique keys =", unique_keys)
+print("Approximate unique power = 2^", round(math.log2(unique_keys), 2))
