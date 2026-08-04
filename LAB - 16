@@ -1,0 +1,37 @@
+from collections import Counter
+
+cipher = input("Enter ciphertext: ").upper()
+
+top = int(input("How many possible plaintexts? "))
+
+english_order = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+
+letters = [ch for ch in cipher if ch.isalpha()]
+
+count = Counter(letters)
+
+cipher_order = [x[0] for x in count.most_common()]
+
+mapping = {}
+
+for i in range(len(cipher_order)):
+    mapping[cipher_order[i]] = english_order[i]
+
+plain = ""
+
+for ch in cipher:
+    if ch in mapping:
+        plain += mapping[ch]
+    else:
+        plain += ch
+
+print("\nCipher letter frequencies:")
+
+for letter, number in count.most_common():
+    print(letter, "=", number)
+
+print("\nMost likely initial plaintext:")
+print(plain)
+
+print("\nRequested candidates:", top)
+print("Frequency analysis gives an initial approximation.")
