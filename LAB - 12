@@ -1,0 +1,25 @@
+text = "meet me at the usual place at ten rather than eight oclock"
+
+# Remove spaces
+text = "".join(ch for ch in text.upper() if ch.isalpha())
+
+# Add X if odd length
+if len(text) % 2 != 0:
+    text += "X"
+
+print("Prepared plaintext:", text)
+
+encrypted = ""
+
+for i in range(0, len(text), 2):
+
+    p1 = ord(text[i]) - 65
+    p2 = ord(text[i + 1]) - 65
+
+    c1 = (9 * p1 + 4 * p2) % 26
+    c2 = (5 * p1 + 7 * p2) % 26
+
+    encrypted += chr(c1 + 65)
+    encrypted += chr(c2 + 65)
+
+print("Ciphertext:", encrypted)
