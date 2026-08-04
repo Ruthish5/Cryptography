@@ -1,0 +1,18 @@
+blocks = ["P1", "P2", "P3", "P4", "P5"]
+
+error_block = 1
+
+print("Ciphertext error occurs in C1\n")
+
+print("CBC Receiver:")
+
+for i in range(len(blocks)):
+
+    if i == error_block - 1:
+        print(blocks[i], "= Corrupted")
+
+    elif i == error_block:
+        print(blocks[i], "= Partially corrupted")
+
+    else:
+        print(blocks[i], "= Correct")
