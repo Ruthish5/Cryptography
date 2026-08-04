@@ -1,0 +1,22 @@
+text = input("Enter ciphertext: ").upper()
+
+a = 17
+b = 11
+a_inverse = 23
+
+result = ""
+
+for ch in text:
+
+    if ch.isalpha():
+
+        c = ord(ch) - ord('A')
+
+        p = (a_inverse * (c - b)) % 26
+
+        result += chr(p + ord('A'))
+
+    else:
+        result += ch
+
+print("Plaintext:", result)
