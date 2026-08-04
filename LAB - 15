@@ -1,0 +1,64 @@
+from collections import Counter
+
+# Common English letter frequencies
+english = {
+    'E': 12.7,
+    'T': 9.1,
+    'A': 8.2,
+    'O': 7.5,
+    'I': 7.0,
+    'N': 6.7
+}
+
+cipher = input("Enter ciphertext: ").upper()
+
+top = int(input("How many possible plaintexts? "))
+
+results = []
+
+for key in range(26):
+
+    plaintext = ""
+
+    for ch in cipher:
+
+        if ch.isalpha():
+
+            value = ord(ch) - 65
+
+            value = (value - key) % 26
+
+            plaintext += chr(value + 65)
+
+        else:
+
+            plaintext += ch
+
+    counts = Counter(plaintext)
+
+    total = sum(counts.values())
+
+    score = 0
+
+    if total > 0:
+
+        for letter, expected in english.items():
+
+            actual = counts[letter] * 100 / total
+
+            score += abs(actual - expected)
+
+    results.append((score, key, plaintext))
+
+
+# Lower score = closer to English
+results.sort()
+
+print("\nTop possible plaintexts:\n")
+
+for i in range(min(top, 26)):
+
+    score, key, text = results[i]
+
+    print(i + 1, ". Key =", key)
+    print("   Plaintext =", text)
