@@ -1,0 +1,52 @@
+plaintext = [
+    0b1010,
+    0b1100,
+    0b1111,
+    0b1001
+]
+
+key1 = 0b1100
+key2 = 0b1010
+key3 = 0b0110
+
+iv = 0b0000
+
+
+def simple_encrypt(block, key):
+    return block ^ key
+
+
+def triple_encrypt(block):
+    # Simplified EDE-style classroom demonstration
+    block = simple_encrypt(block, key1)
+    block = simple_encrypt(block, key2)
+    block = simple_encrypt(block, key3)
+
+    return block
+
+
+previous = iv
+ciphertext = []
+
+print("CBC Encryption:\n")
+
+for block in plaintext:
+
+    xor_result = block ^ previous
+
+    encrypted = triple_encrypt(xor_result)
+
+    ciphertext.append(encrypted)
+
+    print(
+        "Plain =", format(block, "04b"),
+        "Previous =", format(previous, "04b"),
+        "Cipher =", format(encrypted, "04b")
+    )
+
+    previous = encrypted
+
+print("\nCiphertext:")
+
+for block in ciphertext:
+    print(format(block, "04b"), end=" ")
