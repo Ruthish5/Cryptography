@@ -1,0 +1,18 @@
+ciphertext = "BEOKJFLRLZCEH"
+
+new_plaintext = "CASHNOTNEEDED"
+
+key = []
+
+for i in range(len(ciphertext)):
+
+    c = ord(ciphertext[i]) - 65
+    p = ord(new_plaintext[i]) - 65
+
+    k = (c - p) % 26
+
+    key.append(k)
+
+print("Ciphertext:", ciphertext)
+print("Required plaintext:", new_plaintext)
+print("Required key:", key)
