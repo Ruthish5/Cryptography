@@ -1,0 +1,32 @@
+ciphertext = """53‡‡†305))6*;4826)4‡.)4‡);806*;48†8¶60))85;;]8*;:‡*8†83"""
+
+mapping = {
+    '5': 'A',
+    '3': 'G',
+    '‡': 'O',
+    '†': 'D',
+    '0': 'L',
+    ')': 'S',
+    '6': 'I',
+    '*': 'N',
+    ';': 'T',
+    '4': 'H',
+    '8': 'E',
+    '2': 'B',
+    '.': 'P',
+    '¶': 'V',
+    ']': 'C',
+    ':': 'Y'
+}
+
+plaintext = ""
+
+for ch in ciphertext:
+
+    if ch in mapping:
+        plaintext += mapping[ch]
+    else:
+        plaintext += ch
+
+print("Decrypted text:")
+print(plaintext)
