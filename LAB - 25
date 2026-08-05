@@ -1,0 +1,40 @@
+import math
+
+# Example RSA values
+p = 59
+q = 61
+
+n = p * q
+e = 31
+
+# Example known plaintext having
+# a common factor with n
+M = 59 * 5
+
+print("n =", n)
+print("Known plaintext =", M)
+
+factor = math.gcd(M, n)
+
+print("GCD(M, n) =", factor)
+
+if factor != 1 and factor != n:
+
+    p_found = factor
+    q_found = n // factor
+
+    print("\nFactor found!")
+
+    print("p =", p_found)
+    print("q =", q_found)
+
+    phi = (p_found - 1) * (q_found - 1)
+
+    d = pow(e, -1, phi)
+
+    print("phi(n) =", phi)
+    print("Private exponent d =", d)
+
+else:
+
+    print("No useful factor found")
