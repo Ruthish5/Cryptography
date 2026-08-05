@@ -1,0 +1,58 @@
+# Use the S-DES functions from Question 22
+
+key = "0111111101"
+
+plaintext = [
+    "00000001",
+    "00000010",
+    "00000100"
+]
+
+
+def xor(a, b):
+    return ''.join(
+        str(int(x) ^ int(y))
+        for x, y in zip(a, b)
+    )
+
+
+# Encryption
+ciphertext = []
+
+for i in range(len(plaintext)):
+
+    counter = format(i, "08b")
+
+    encrypted_counter = encrypt(counter, key)
+
+    cipher = xor(
+        plaintext[i],
+        encrypted_counter
+    )
+
+    ciphertext.append(cipher)
+
+
+print("Ciphertext:")
+print(" ".join(ciphertext))
+
+
+# Decryption
+decrypted = []
+
+for i in range(len(ciphertext)):
+
+    counter = format(i, "08b")
+
+    encrypted_counter = encrypt(counter, key)
+
+    plain = xor(
+        ciphertext[i],
+        encrypted_counter
+    )
+
+    decrypted.append(plain)
+
+
+print("Decrypted:")
+print(" ".join(decrypted))
