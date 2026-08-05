@@ -1,0 +1,17 @@
+text = input("Enter binary plaintext: ")
+block_size = int(input("Enter block size: "))
+
+# Always add the padding start bit
+padded = text + "1"
+
+# Add zeros until complete block
+while len(padded) % block_size != 0:
+    padded += "0"
+
+print("Original plaintext:", text)
+print("Padded plaintext  :", padded)
+
+print("\nBlocks:")
+
+for i in range(0, len(padded), block_size):
+    print(padded[i:i + block_size])
